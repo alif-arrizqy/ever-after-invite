@@ -1,0 +1,11 @@
+# Supabase CLI (supabase start / local). Schema custom harus tercantum di sini
+# supaya PostgREST mengizinkan API ke belle_wedding (hindari PGRST106).
+#
+# Proyek HOSTED (dashboard): WAJIB juga menambah belle_wedding di
+# Dashboard → Project Settings → Data API → "Exposed schemas" → Save.
+# Tanpa langkah dashboard, error: Invalid schema: belle_wedding (PGRST106).
+
+[api]
+enabled = true
+schemas = ["public", "graphql_public", "belle_wedding"]
+extra_search_path = ["public", "extensions"]
