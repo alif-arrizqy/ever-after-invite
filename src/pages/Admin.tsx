@@ -14,6 +14,7 @@ export default function AdminPage() {
   const { guests, addGuest, removeGuest } = useWeddingStore();
   const [newName, setNewName] = useState('');
   const [waDialog, setWaDialog] = useState<{ name: string; slug: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const slug = generateSlug(newName);
 
