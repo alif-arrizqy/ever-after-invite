@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, Trash2, MessageCircle, Download, Plus, Users, ExternalLink } from 'lucide-react';
+import { Copy, Trash2, MessageCircle, Upload, Plus, Users, ExternalLink } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useWeddingStore, generateSlug } from '@/store/weddingStore';
 import { toast } from 'sonner';
+import * as XLSX from 'xlsx';
 
 const BASE_URL = typeof window !== 'undefined' ? window.location.origin : '';
 
@@ -13,6 +14,7 @@ export default function AdminPage() {
   const { guests, addGuest, removeGuest } = useWeddingStore();
   const [newName, setNewName] = useState('');
   const [waDialog, setWaDialog] = useState<{ name: string; slug: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const slug = generateSlug(newName);
 
@@ -33,17 +35,27 @@ export default function AdminPage() {
     return `Assalamu'alaikum ${name},\n\nKami dengan penuh kebahagiaan mengundang Anda untuk hadir dalam acara pernikahan kami:\n\n💍 Andi Pratama & Putri Ayu Lestari\n📅 Minggu, 15 September 2025\n\nBerikut undangan digital untuk Anda:\n${BASE_URL}/?guest=${guestSlug}\n\nSemoga Anda berkenan hadir. Terima kasih! 🤲`;
   };
 
-  const exportCSV = () => {
-    const header = 'No,Name,Slug,Link\n';
-    const rows = guests.map((g, i) => `${i + 1},"${g.name}",${g.slug},${BASE_URL}/?guest=${g.slug}`).join('\n');
-    const blob = new Blob([header + rows], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'guest-list.csv';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('CSV berhasil diunduh! 📄');
+  const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const data = evt.target?.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const rows: any[] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      let count = 0;
+      rows.forEach((row) => {
+        // Support: first column as name, skip header if it says "nama" or "name"
+        const name = String(row[0] || '').trim();
+        if (!name || name.toLowerCase() === 'nama' || name.toLowerCase() === 'name') return;
+        addGuest(name);
+        count++;
+      });
+      toast.success(`${count} tamu berhasil diimport! 🎉`);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    };
+    reader.readAsBinaryString(file);
   };
 
   return (
@@ -99,13 +111,22 @@ export default function AdminPage() {
               <h2 className="font-heading text-lg text-foreground">
                 Daftar Tamu ({guests.length})
               </h2>
-              <button
-                onClick={exportCSV}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-secondary text-secondary-foreground font-body text-xs tracking-wider uppercase rounded-lg hover:bg-secondary/80 transition-colors"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Export CSV
-              </button>
+              <div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".xlsx,.xls,.csv"
+                  onChange={handleImportExcel}
+                  className="hidden"
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-secondary text-secondary-foreground font-body text-xs tracking-wider uppercase rounded-lg hover:bg-secondary/80 transition-colors"
+                >
+                  <Upload className="w-3.5 h-3.5" />
+                  Import Excel
+                </button>
+              </div>
             </div>
 
             <div className="overflow-x-auto">
