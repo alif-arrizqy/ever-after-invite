@@ -36,6 +36,15 @@ export function generateSlug(name: string): string {
     .replace(/-+/g, '-');
 }
 
+export function generateUniqueSlug(name: string, existingGuests: Guest[]): string {
+  const base = generateSlug(name);
+  const existingSlugs = new Set(existingGuests.map(g => g.slug));
+  if (!existingSlugs.has(base)) return base;
+  let counter = 2;
+  while (existingSlugs.has(`${base}-${counter}`)) counter++;
+  return `${base}-${counter}`;
+}
+
 let guestIdCounter = 5;
 let messageIdCounter = 4;
 
