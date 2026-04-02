@@ -75,7 +75,7 @@ export function useWeddingStore() {
   });
 
   const addGuest = useCallback((name: string) => {
-    const slug = generateSlug(name);
+    const slug = generateUniqueSlug(name, guests);
     guests = [...guests, { id: String(guestIdCounter++), name, slug }];
     notify();
   }, []);
