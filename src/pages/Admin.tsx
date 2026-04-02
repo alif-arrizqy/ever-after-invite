@@ -111,13 +111,22 @@ export default function AdminPage() {
               <h2 className="font-heading text-lg text-foreground">
                 Daftar Tamu ({guests.length})
               </h2>
-              <button
-                onClick={exportCSV}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-secondary text-secondary-foreground font-body text-xs tracking-wider uppercase rounded-lg hover:bg-secondary/80 transition-colors"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Export CSV
-              </button>
+              <div>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".xlsx,.xls,.csv"
+                  onChange={handleImportExcel}
+                  className="hidden"
+                />
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-secondary text-secondary-foreground font-body text-xs tracking-wider uppercase rounded-lg hover:bg-secondary/80 transition-colors"
+                >
+                  <Upload className="w-3.5 h-3.5" />
+                  Import Excel
+                </button>
+              </div>
             </div>
 
             <div className="overflow-x-auto">
