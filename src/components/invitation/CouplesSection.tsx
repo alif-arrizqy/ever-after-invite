@@ -55,38 +55,36 @@ export default function CouplesSection() {
   const { groom, bride } = CoupleSectionData;
   return (
     <section className="py-20 px-6 bg-card">
-      <div className="max-w-4xl mx-auto">
-        <div className="grid gap-16 items-start md:grid-cols-2">
-          <PersonCard
-            fullName={groom.fullName}
-            parentLine={groom.parentLine}
-            imageSrc={groom.image.src}
-            imageAlt={groom.image.alt}
-            instagramUrl={groom.instagramUrl}
-            instagramHandle={groom.instagramHandle}
-            delay={0}
-          />
-
-          <PersonCard
-            fullName={bride.fullName}
-            parentLine={bride.parentLine}
-            imageSrc={bride.image.src}
-            imageAlt={bride.image.alt}
-            instagramUrl={bride.instagramUrl}
-            instagramHandle={bride.instagramHandle}
-            delay={0.2}
-          />
-        </div>
+      <div className="mx-auto grid max-w-4xl grid-cols-1 items-start gap-10 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-8 md:gap-y-0 lg:gap-x-12">
+        <PersonCard
+          fullName={groom.fullName}
+          parentLine={groom.parentLine}
+          imageSrc={groom.image.src}
+          imageAlt={groom.image.alt}
+          instagramUrl={groom.instagramUrl}
+          instagramHandle={groom.instagramHandle}
+          delay={0}
+        />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.88 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={scrollViewport}
-          transition={{ ...scrollRevealTransitionMedium, delay: 0.28 }}
-          className="mt-8 text-center"
+          transition={{ ...scrollRevealTransitionMedium, delay: 0.14 }}
+          className="flex justify-center py-1 md:self-center md:py-0"
         >
-          <span className="font-heading text-5xl text-gold">&</span>
+          <span className="font-heading text-5xl leading-none text-gold">&</span>
         </motion.div>
+
+        <PersonCard
+          fullName={bride.fullName}
+          parentLine={bride.parentLine}
+          imageSrc={bride.image.src}
+          imageAlt={bride.image.alt}
+          instagramUrl={bride.instagramUrl}
+          instagramHandle={bride.instagramHandle}
+          delay={0.28}
+        />
       </div>
     </section>
   );
