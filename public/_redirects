@@ -1,0 +1,2 @@
+# SPA fallback: semua path (mis. /admin) dilayani index.html agar React Router jalan.
+/*    /index.html   200
