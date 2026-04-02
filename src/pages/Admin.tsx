@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, Trash2, MessageCircle, Download, Plus, Users, ExternalLink } from 'lucide-react';
+import { Copy, Trash2, MessageCircle, Upload, Plus, Users, ExternalLink } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useWeddingStore, generateSlug } from '@/store/weddingStore';
 import { toast } from 'sonner';
+import * as XLSX from 'xlsx';
 
 const BASE_URL = typeof window !== 'undefined' ? window.location.origin : '';
 
