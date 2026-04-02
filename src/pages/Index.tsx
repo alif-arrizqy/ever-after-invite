@@ -1,16 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useSearchParams } from 'react-router-dom';
+import HeroSection from '@/components/invitation/HeroSection';
+import GreetingSection from '@/components/invitation/GreetingSection';
+import CouplesSection from '@/components/invitation/CouplesSection';
+import EventSection from '@/components/invitation/EventSection';
+import LoveStorySection from '@/components/invitation/LoveStorySection';
+import GallerySection from '@/components/invitation/GallerySection';
+import GuestbookSection from '@/components/invitation/GuestbookSection';
+import GiftSection from '@/components/invitation/GiftSection';
+import FooterSection from '@/components/invitation/FooterSection';
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+export default function Index() {
+  const [searchParams] = useSearchParams();
+  const guestSlug = searchParams.get('guest');
+  const guestName = guestSlug
+    ? guestSlug
+        .split('-')
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(' ')
+    : null;
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="scroll-smooth">
+      <HeroSection guestName={guestName} />
+      <GreetingSection />
+      <CouplesSection />
+      <EventSection />
+      <LoveStorySection />
+      <GallerySection />
+      <GuestbookSection />
+      <GiftSection />
+      <FooterSection />
     </div>
   );
-};
-
-const Index = PlaceholderIndex;
-
-export default Index;
+}
