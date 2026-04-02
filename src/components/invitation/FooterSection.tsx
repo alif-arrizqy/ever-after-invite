@@ -1,38 +1,35 @@
 import { motion } from 'framer-motion';
-import coupleFooter from '@/assets/couple-footer.jpg';
+import { scrollRevealTransition, scrollViewport } from '@/lib/scroll-motion';
+import { FooterSectionData } from '@/constant/WeddingData';
 
 export default function FooterSection() {
+  const { image, coupleTitle, closingLine, quote, quoteSource, creditLine } = FooterSectionData;
   return (
     <section className="py-16 px-6 bg-card text-center">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="max-w-md mx-auto"
+        viewport={scrollViewport}
+        transition={scrollRevealTransition}
+        className="mx-auto max-w-md"
       >
-        <div className="w-40 h-40 rounded-full overflow-hidden mx-auto mb-8 border-4 border-gold/30 shadow-lg">
-          <img src={coupleFooter} alt="Andi & Putri" className="w-full h-full object-cover" loading="lazy" />
+        <div className="mx-auto mb-8 h-40 w-40 overflow-hidden rounded-full border-[3px] border-gold/40 shadow-lg shadow-primary/10">
+          <img src={image.src} alt={image.alt} className="h-full w-full object-cover" loading="lazy" />
         </div>
 
-        <h2 className="font-heading text-2xl md:text-3xl text-foreground mb-3">
-          Andi & Putri
-        </h2>
+        <h2 className="mb-3 font-heading text-2xl text-foreground md:text-3xl">{coupleTitle}</h2>
 
-        <p className="text-muted-foreground font-body text-sm leading-relaxed mb-6">
-          Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.
-        </p>
+        <p className="mb-6 font-body text-sm leading-relaxed text-muted-foreground">{closingLine}</p>
 
-        <p className="text-muted-foreground font-body text-sm italic mb-8">
-          "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya."
+        <p className="mb-8 font-body text-sm italic leading-relaxed text-muted-foreground">
+          &ldquo;{quote}&rdquo;
           <br />
-          <span className="text-xs not-italic text-gold">(QS. Ar-Rum: 21)</span>
+          <span className="mt-1 inline-block text-xs not-italic text-gold">({quoteSource})</span>
         </p>
 
-        <div className="h-px bg-border w-24 mx-auto mb-6" />
+        <div className="mx-auto mb-6 h-px w-24 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
 
-        <p className="font-body text-xs text-muted-foreground">
-          Made with ❤️ by <span className="text-primary font-medium">Lovable</span>
-        </p>
+        <p className="font-body text-xs text-muted-foreground"><a href="https://www.instagram.com/alif_arrizqy/" target="_blank" rel="noopener noreferrer">{creditLine}</a></p>
       </motion.div>
     </section>
   );

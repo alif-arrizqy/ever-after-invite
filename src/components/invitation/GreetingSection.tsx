@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { scrollRevealTransition, scrollViewport } from '@/lib/scroll-motion';
 
 export default function GreetingSection() {
   return (
@@ -7,8 +8,8 @@ export default function GreetingSection() {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={scrollViewport}
+          transition={scrollRevealTransition}
           className="text-gold font-body text-sm tracking-[0.25em] uppercase mb-6"
         >
           بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
@@ -17,8 +18,8 @@ export default function GreetingSection() {
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={scrollViewport}
+          transition={{ ...scrollRevealTransition, delay: 0.12 }}
           className="font-heading text-3xl md:text-4xl text-foreground mb-8"
         >
           Assalamu'alaikum Wr. Wb.
@@ -27,8 +28,8 @@ export default function GreetingSection() {
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={scrollViewport}
+          transition={{ ...scrollRevealTransition, delay: 0.22 }}
           className="text-muted-foreground font-body leading-relaxed text-base"
         >
           Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i
@@ -40,8 +41,8 @@ export default function GreetingSection() {
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          viewport={scrollViewport}
+          transition={{ ...scrollRevealTransition, delay: 0.32 }}
           className="h-px bg-border w-32 mx-auto mt-10"
         />
       </div>

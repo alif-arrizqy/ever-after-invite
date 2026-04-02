@@ -1,45 +1,46 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { scrollEase, scrollRevealTransition, scrollViewport } from '@/lib/scroll-motion';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import gallery1 from '@/assets/gallery-1.jpg';
-import gallery2 from '@/assets/gallery-2.jpg';
-import gallery3 from '@/assets/gallery-3.jpg';
-import gallery4 from '@/assets/gallery-4.jpg';
-import gallery5 from '@/assets/gallery-5.jpg';
-import gallery6 from '@/assets/gallery-6.jpg';
-
-const images = [gallery1, gallery2, gallery3, gallery4, gallery5, gallery6];
+import { GallerySectionData } from '@/constant/WeddingData';
 
 export default function GallerySection() {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<(typeof GallerySectionData.images)[0] | null>(null);
 
   return (
     <section className="py-20 px-6 batik-pattern">
-      <div className="max-w-5xl mx-auto">
+      <div className="mx-auto max-w-5xl">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="font-heading text-3xl md:text-4xl text-center text-foreground mb-12"
+          viewport={scrollViewport}
+          transition={scrollRevealTransition}
+          className="mb-12 text-center font-heading text-3xl text-foreground md:text-4xl"
         >
-          Our Gallery
+          {GallerySectionData.sectionTitle}
         </motion.h2>
 
-        <div className="columns-2 md:columns-3 gap-4 space-y-4">
-          {images.map((src, i) => (
+        <div className="columns-2 gap-4 space-y-4 md:columns-3">
+          {GallerySectionData.images.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="break-inside-avoid cursor-pointer group"
-              onClick={() => setSelected(src)}
+              initial={{ opacity: 0, y: 22, scale: 0.97 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={scrollViewport}
+              transition={{
+                type: 'tween',
+                delay: i * 0.055,
+                duration: 0.58,
+                ease: scrollEase,
+              }}
+              whileHover={{ y: -4, transition: { type: 'tween', duration: 0.22, ease: scrollEase } }}
+              className="group cursor-pointer break-inside-avoid"
+              onClick={() => setSelected(item)}
             >
               <img
-                src={src}
-                alt={`Gallery photo ${i + 1}`}
-                className="w-full rounded-lg shadow-md group-hover:shadow-xl transition-shadow duration-300"
+                src={item.src}
+                alt={item.alt}
+                className="w-full rounded-xl border border-gold/15 shadow-md transition-shadow duration-300 group-hover:border-gold/35 group-hover:shadow-lg"
                 loading="lazy"
               />
             </motion.div>
@@ -48,9 +49,9 @@ export default function GallerySection() {
       </div>
 
       <Dialog open={!!selected} onOpenChange={() => setSelected(null)}>
-        <DialogContent className="max-w-3xl p-2 bg-foreground/95 border-none">
+        <DialogContent className="max-w-3xl border-gold/20 bg-foreground/95 p-2">
           {selected && (
-            <img src={selected} alt="Gallery preview" className="w-full rounded-lg" />
+            <img src={selected.src} alt={selected.alt} className="w-full rounded-lg" />
           )}
         </DialogContent>
       </Dialog>
