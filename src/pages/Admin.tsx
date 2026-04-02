@@ -35,17 +35,27 @@ export default function AdminPage() {
     return `Assalamu'alaikum ${name},\n\nKami dengan penuh kebahagiaan mengundang Anda untuk hadir dalam acara pernikahan kami:\n\n💍 Andi Pratama & Putri Ayu Lestari\n📅 Minggu, 15 September 2025\n\nBerikut undangan digital untuk Anda:\n${BASE_URL}/?guest=${guestSlug}\n\nSemoga Anda berkenan hadir. Terima kasih! 🤲`;
   };
 
-  const exportCSV = () => {
-    const header = 'No,Name,Slug,Link\n';
-    const rows = guests.map((g, i) => `${i + 1},"${g.name}",${g.slug},${BASE_URL}/?guest=${g.slug}`).join('\n');
-    const blob = new Blob([header + rows], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'guest-list.csv';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success('CSV berhasil diunduh! 📄');
+  const handleImportExcel = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const data = evt.target?.result;
+      const workbook = XLSX.read(data, { type: 'binary' });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const rows: any[] = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+      let count = 0;
+      rows.forEach((row) => {
+        // Support: first column as name, skip header if it says "nama" or "name"
+        const name = String(row[0] || '').trim();
+        if (!name || name.toLowerCase() === 'nama' || name.toLowerCase() === 'name') return;
+        addGuest(name);
+        count++;
+      });
+      toast.success(`${count} tamu berhasil diimport! 🎉`);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    };
+    reader.readAsBinaryString(file);
   };
 
   return (
