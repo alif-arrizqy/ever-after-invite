@@ -4,80 +4,95 @@
 
 @layer base {
   :root {
-    --background: 30 60% 97%;
-    --foreground: 20 20% 20%;
+    /* === PALET UTAMA: Rose Pink #DC809B & Peach #f8d5c1 === */
 
-    --card: 30 40% 95%;
-    --card-foreground: 20 20% 20%;
+    /* Background: #f8d5c1 (peach lembut) → HSL(22, 80%, 87%) */
+    --background: 22 80% 87%;
+    /* Foreground: teks gelap dengan nuansa rose */
+    --foreground: 342 35% 22%;
 
-    --popover: 30 60% 97%;
-    --popover-foreground: 20 20% 20%;
+    /* Card: sedikit lebih terang dari background */
+    --card: 22 55% 92%;
+    --card-foreground: 342 35% 22%;
 
-    --primary: 22 52% 51%;
-    --primary-foreground: 30 60% 97%;
+    --popover: 22 80% 87%;
+    --popover-foreground: 342 35% 22%;
 
-    --secondary: 100 12% 49%;
-    --secondary-foreground: 30 60% 97%;
+    /* Primary: #DC809B (pink mawar) → HSL(342, 57%, 68%) */
+    --primary: 342 57% 68%;
+    --primary-foreground: 0 0% 100%;
 
-    --muted: 30 20% 90%;
-    --muted-foreground: 20 10% 45%;
+    /* Secondary: rose muda/nude */
+    --secondary: 342 30% 84%;
+    --secondary-foreground: 342 40% 28%;
 
-    --accent: 40 55% 58%;
-    --accent-foreground: 20 20% 15%;
+    /* Muted: peach redup */
+    --muted: 22 35% 90%;
+    --muted-foreground: 342 15% 48%;
+
+    /* Accent / Gold: #c9a96e → HSL(39, 46%, 61%) */
+    --accent: 39 46% 61%;
+    --accent-foreground: 342 35% 22%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 20% 85%;
-    --input: 30 20% 85%;
-    --ring: 22 52% 51%;
+    /* Border & input: rose-tinted */
+    --border: 342 25% 80%;
+    --input: 342 25% 80%;
+    --ring: 342 57% 68%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 20 20% 15%;
-    --sidebar-foreground: 30 20% 90%;
-    --sidebar-primary: 22 52% 51%;
-    --sidebar-primary-foreground: 30 60% 97%;
-    --sidebar-accent: 20 15% 22%;
-    --sidebar-accent-foreground: 30 20% 90%;
-    --sidebar-border: 20 10% 25%;
-    --sidebar-ring: 22 52% 51%;
+    /* Sidebar - menggunakan nuansa rose gelap */
+    --sidebar-background: 342 35% 18%;
+    --sidebar-foreground: 22 40% 90%;
+    --sidebar-primary: 342 57% 68%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 342 30% 25%;
+    --sidebar-accent-foreground: 22 40% 90%;
+    --sidebar-border: 342 20% 28%;
+    --sidebar-ring: 342 57% 68%;
 
-    --gold: 40 55% 58%;
-    --sage: 100 12% 49%;
-    --terracotta: 22 52% 51%;
-    --cream: 30 60% 97%;
-    --cream-dark: 30 40% 92%;
+    /* Custom tokens */
+    --gold: 39 46% 61%;          /* #c9a96e champagne gold */
+    --rose: 342 57% 68%;         /* #DC809B primary rose */
+    --cream: 22 80% 96%;         /* very light cream */
+    --cream-dark: 22 55% 90%;    /* cream agak gelap */
   }
 
   .dark {
-    --background: 20 20% 10%;
-    --foreground: 30 20% 90%;
-    --card: 20 15% 15%;
-    --card-foreground: 30 20% 90%;
-    --popover: 20 15% 15%;
-    --popover-foreground: 30 20% 90%;
-    --primary: 22 52% 55%;
-    --primary-foreground: 30 60% 97%;
-    --secondary: 100 12% 40%;
-    --secondary-foreground: 30 60% 97%;
-    --muted: 20 10% 20%;
-    --muted-foreground: 30 10% 60%;
-    --accent: 40 55% 50%;
-    --accent-foreground: 30 60% 97%;
+    --background: 342 25% 12%;
+    --foreground: 22 40% 90%;
+    --card: 342 22% 18%;
+    --card-foreground: 22 40% 90%;
+    --popover: 342 22% 18%;
+    --popover-foreground: 22 40% 90%;
+    --primary: 342 57% 72%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 342 20% 28%;
+    --secondary-foreground: 22 40% 90%;
+    --muted: 342 15% 22%;
+    --muted-foreground: 342 10% 58%;
+    --accent: 39 46% 55%;
+    --accent-foreground: 22 40% 90%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
-    --border: 20 10% 25%;
-    --input: 20 10% 25%;
-    --ring: 22 52% 55%;
-    --sidebar-background: 20 20% 8%;
-    --sidebar-foreground: 30 20% 90%;
-    --sidebar-primary: 22 52% 55%;
-    --sidebar-primary-foreground: 30 60% 97%;
-    --sidebar-accent: 20 15% 15%;
-    --sidebar-accent-foreground: 30 20% 90%;
-    --sidebar-border: 20 10% 18%;
-    --sidebar-ring: 22 52% 55%;
+    --border: 342 15% 28%;
+    --input: 342 15% 28%;
+    --ring: 342 57% 68%;
+    --sidebar-background: 342 25% 8%;
+    --sidebar-foreground: 22 40% 90%;
+    --sidebar-primary: 342 57% 72%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 342 20% 15%;
+    --sidebar-accent-foreground: 22 40% 90%;
+    --sidebar-border: 342 15% 20%;
+    --sidebar-ring: 342 57% 68%;
+    --gold: 39 46% 61%;
+    --rose: 342 57% 72%;
+    --cream: 22 80% 96%;
+    --cream-dark: 22 55% 90%;
   }
 }
 
@@ -96,16 +111,21 @@
 @layer utilities {
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--gold)), hsl(40 70% 70%), hsl(var(--gold)));
+    background-image: linear-gradient(135deg, hsl(var(--gold)), hsl(39 65% 72%), hsl(var(--gold)));
+  }
+
+  .text-gradient-rose {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(342 70% 60%), hsl(var(--primary)), hsl(342 45% 72%));
   }
 }
 
-/* Batik pattern overlay */
+/* Batik subtle pattern overlay */
 .batik-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c17047' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23DC809B' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* Gunungan silhouette */
+/* Gunungan silhouette dekoratif */
 .gunungan-bg {
   position: relative;
 }
@@ -117,8 +137,8 @@
   transform: translateX(-50%);
   width: 300px;
   height: 400px;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 10 L190 280 Q100 260 10 280 Z' fill='%23c17047'/%3E%3Cpath d='M100 40 L160 250 Q100 235 40 250 Z' fill='%23c17047'/%3E%3Ccircle cx='100' cy='100' r='20' fill='%23c17047'/%3E%3Cpath d='M80 150 Q100 120 120 150 Q100 140 80 150Z' fill='%23c17047'/%3E%3C/svg%3E");
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 10 L190 280 Q100 260 10 280 Z' fill='%23DC809B'/%3E%3Cpath d='M100 40 L160 250 Q100 235 40 250 Z' fill='%23DC809B'/%3E%3Ccircle cx='100' cy='100' r='20' fill='%23DC809B'/%3E%3Cpath d='M80 150 Q100 120 120 150 Q100 140 80 150Z' fill='%23DC809B'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-size: contain;
   pointer-events: none;
@@ -126,4 +146,32 @@
 
 .scroll-smooth {
   scroll-behavior: smooth;
+}
+
+/* Hover underline animation dari kiri ke kanan */
+.hover-underline-animate {
+  position: relative;
+}
+.hover-underline-animate::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hover-underline-animate:hover::after {
+  width: 100%;
+}
+
+/* Aksesibilitas: kurangi semua animasi jika user prefer */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

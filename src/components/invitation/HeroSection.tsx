@@ -1,18 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 import { HeroSectionData, WEDDING_COUNTDOWN_TARGET } from '@/constant/WeddingData';
-import { inviteBtnHero } from '@/components/invitation/invite-styles';
 import { scrollEase } from '@/lib/scroll-motion';
 import InvitationMusic from '@/components/invitation/InvitationMusic';
 
 interface HeroSectionProps {
   guestName: string | null;
-  /** Dipanggil saat tamu mengetuk "Buka undangan" — untuk membuka scroll halaman */
-  onOpenInvitation?: () => void;
 }
 
-function CountdownBlocks() {
+const CountdownBlocks = memo(function CountdownBlocks() {
   const [tick, setTick] = useState(() => Date.now());
 
   useEffect(() => {
@@ -20,8 +16,8 @@ function CountdownBlocks() {
     return () => window.clearInterval(id);
   }, []);
 
-  const target = WEDDING_COUNTDOWN_TARGET.getTime();
-  const diff = target - tick;
+  const target  = WEDDING_COUNTDOWN_TARGET.getTime();
+  const diff    = target - tick;
 
   if (diff <= 0) {
     return (
@@ -29,7 +25,8 @@ function CountdownBlocks() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.15, type: 'tween', duration: 0.65, ease: scrollEase }}
-        className="mt-6 text-gold font-body text-xs md:text-sm tracking-[0.2em] uppercase"
+        className="mt-6 font-body text-xs md:text-sm tracking-[0.2em] uppercase"
+        style={{ color: 'hsl(39 46% 71%)' }}
       >
         Alhamdulillah — hari yang kami nanti telah tiba
       </motion.p>
@@ -37,14 +34,14 @@ function CountdownBlocks() {
   }
 
   const totalSec = Math.floor(diff / 1000);
-  const days = Math.floor(totalSec / 86400);
-  const hours = Math.floor((totalSec % 86400) / 3600);
-  const minutes = Math.floor((totalSec % 3600) / 60);
-  const seconds = totalSec % 60;
+  const days     = Math.floor(totalSec / 86400);
+  const hours    = Math.floor((totalSec % 86400) / 3600);
+  const minutes  = Math.floor((totalSec % 3600) / 60);
+  const seconds  = totalSec % 60;
 
   const cells = [
-    { value: days, label: 'Hari' },
-    { value: hours, label: 'Jam' },
+    { value: days,    label: 'Hari' },
+    { value: hours,   label: 'Jam' },
     { value: minutes, label: 'Menit' },
     { value: seconds, label: 'Detik' },
   ];
@@ -56,19 +53,19 @@ function CountdownBlocks() {
       transition={{ delay: 1.1, type: 'tween', duration: 0.72, ease: scrollEase }}
       className="mt-8 w-full max-w-md"
     >
-      <p className="mb-3 text-primary-foreground/70 font-body text-xs tracking-[0.25em] uppercase">
+      <p className="mb-3 font-body text-xs tracking-[0.25em] uppercase text-white/65">
         Menuju hari bahagia
       </p>
       <div className="grid grid-cols-4 gap-2 md:gap-3">
         {cells.map(cell => (
           <div
             key={cell.label}
-            className="rounded-xl border border-gold/30 bg-primary-foreground/10 px-1 py-2 text-center shadow-inner shadow-black/5 backdrop-blur-sm md:py-3"
+            className="rounded-xl border border-white/20 bg-white/10 px-1 py-2.5 text-center shadow-inner shadow-black/10 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/15 md:py-3"
           >
-            <span className="block font-heading text-xl text-primary-foreground tabular-nums md:text-2xl">
+            <span className="block font-heading text-xl text-white tabular-nums md:text-2xl">
               {String(cell.value).padStart(2, '0')}
             </span>
-            <span className="text-[10px] font-body uppercase tracking-wider text-primary-foreground/75 md:text-xs">
+            <span className="text-[10px] font-body uppercase tracking-wider text-white/70 md:text-xs">
               {cell.label}
             </span>
           </div>
@@ -76,20 +73,17 @@ function CountdownBlocks() {
       </div>
     </motion.div>
   );
-}
+});
 
-export default function HeroSection({ guestName, onOpenInvitation }: HeroSectionProps) {
-  const scrollToContent = () => {
-    onOpenInvitation?.();
-    requestAnimationFrame(() => {
-      document.getElementById('greeting')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  };
-
+const HeroSection = memo(function HeroSection({ guestName }: HeroSectionProps) {
   return (
-    <section className="relative flex min-h-[100dvh] min-h-screen flex-col overflow-hidden">
+    <section
+      id="hero"
+      className="relative flex min-h-[100dvh] flex-col overflow-hidden"
+    >
       <InvitationMusic />
 
+      {/* Foto background dengan parallax subtle */}
       <div className="absolute inset-0">
         <img
           src={HeroSectionData.backgroundImage}
@@ -98,69 +92,105 @@ export default function HeroSection({ guestName, onOpenInvitation }: HeroSection
           width={1920}
           height={1080}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/40 to-foreground/70" />
+        {/* Overlay gradient — rose-tinted agar selaras tema */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(30,10,18,0.65) 0%, rgba(50,15,30,0.42) 45%, rgba(30,10,18,0.72) 100%)',
+          }}
+        />
+        {/* Lapisan rose tipis untuk cohesive color */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'rgba(220, 128, 155, 0.12)' }}
+        />
       </div>
 
-      {/* Blok konten benar-benar di tengah viewport; ruang bawah untuk tombol musik (fixed) */}
-      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-28 pt-10 sm:pb-24">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pb-20 pt-10 sm:pb-16">
         <div className="mx-auto flex w-full max-w-2xl flex-col items-center text-center">
+          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, type: 'tween', duration: 0.65, ease: scrollEase }}
-            className="mb-4 font-body text-sm uppercase tracking-[0.3em] text-gold"
+            transition={{ delay: 0.25, type: 'tween', duration: 0.65, ease: scrollEase }}
+            className="mb-4 font-body text-xs uppercase tracking-[0.35em] text-white/70"
           >
             {HeroSectionData.tagline}
           </motion.p>
 
+          {/* Nama pasangan — font-accent (Dancing Script) untuk nuansa romantis */}
           <motion.h1
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, type: 'tween', duration: 0.88, ease: scrollEase }}
-            className="mb-2 font-heading text-5xl leading-tight text-primary-foreground md:text-7xl"
+            transition={{ delay: 0.55, type: 'tween', duration: 0.9, ease: scrollEase }}
+            className="mb-2 font-accent text-white leading-tight"
+            style={{ fontSize: 'clamp(3.2rem, 10vw, 5.5rem)' }}
           >
-            {HeroSectionData.groomShortName} <span className="text-gold">&</span> {HeroSectionData.brideShortName}
+            {HeroSectionData.groomShortName}{' '}
+            <span style={{ color: 'hsl(39 46% 71%)' }}>&</span>{' '}
+            {HeroSectionData.brideShortName}
           </motion.h1>
 
+          {/* Divider gold */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ delay: 1, type: 'tween', duration: 0.72, ease: scrollEase }}
-            className="mx-auto my-6 h-px w-56 bg-gradient-to-r from-transparent via-gold/70 to-transparent"
+            transition={{ delay: 0.98, type: 'tween', duration: 0.75, ease: scrollEase }}
+            className="mx-auto my-6 h-px w-56"
+            style={{
+              background: 'linear-gradient(to right, transparent, hsl(39 46% 71% / 0.7), transparent)',
+            }}
           />
 
+          {/* Tanggal */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, type: 'tween', duration: 0.6, ease: scrollEase }}
-            className="mb-2 font-body text-base text-primary-foreground/80"
+            transition={{ delay: 1.18, type: 'tween', duration: 0.6, ease: scrollEase }}
+            className="mb-2 font-body text-sm tracking-[0.12em] text-white/80"
           >
             {HeroSectionData.weddingDateDisplay}
           </motion.p>
 
+          {/* Countdown */}
           <CountdownBlocks />
 
+          {/* Nama tamu */}
           {guestName && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.45, type: 'tween', duration: 0.65, ease: scrollEase }}
-              className="mt-10"
+              transition={{ delay: 1.42, type: 'tween', duration: 0.65, ease: scrollEase }}
+              className="mt-10 rounded-2xl border border-white/20 bg-white/10 px-6 py-4 backdrop-blur-sm"
             >
-              <p className="mb-1 font-body text-sm text-primary-foreground/70">Kepada Yth.</p>
-              <p className="font-heading text-2xl italic text-primary-foreground md:text-3xl">{guestName}</p>
+              <p className="mb-1 font-body text-xs uppercase tracking-[0.25em] text-white/60">
+                Kepada Yth.
+              </p>
+              <p className="font-heading text-2xl italic text-white md:text-3xl">{guestName}</p>
             </motion.div>
           )}
 
-          {/* Jarak jelas antara countdown (atau nama tamu) dan CTA */}
-          <div className="mt-14 w-full md:mt-20">
-            <button type="button" onClick={scrollToContent} className={inviteBtnHero}>
-              Buka undangan
-              <ChevronDown className="h-4 w-4 opacity-90" />
-            </button>
-          </div>
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.7, type: 'tween', duration: 0.6, ease: scrollEase }}
+            className="mt-14 flex flex-col items-center gap-2"
+          >
+            <p className="font-body text-[10px] uppercase tracking-[0.3em] text-white/40">
+              Gulir ke bawah
+            </p>
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              className="h-6 w-px bg-gradient-to-b from-white/40 to-transparent"
+            />
+          </motion.div>
         </div>
       </div>
     </section>
   );
-}
+});
+
+export default HeroSection;

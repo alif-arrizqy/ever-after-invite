@@ -1,47 +1,90 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
-import { scrollEase, scrollRevealTransition, scrollViewport } from '@/lib/scroll-motion';
+import { scrollEase, scrollViewport } from '@/lib/scroll-motion';
 import { LoveStorySectionData } from '@/constant/WeddingData';
+import SectionHeader from '@/components/invitation/SectionHeader';
+
+/** Item tunggal milestone love story */
+const MilestoneItem = memo(function MilestoneItem({
+  year,
+  title,
+  desc,
+  index,
+}: {
+  year:   string;
+  title:  string;
+  desc:   string;
+  index:  number;
+}) {
+  const isEven   = index % 2 === 0;
+  const xOffset  = isEven ? -32 : 32;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: xOffset }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={scrollViewport}
+      transition={{ type: 'tween', duration: 0.65, delay: index * 0.07, ease: scrollEase }}
+      className={`relative mb-14 flex items-start gap-4 pl-16 md:pl-0 ${
+        isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+      }`}
+    >
+      {/* Dot / heart pada garis timeline */}
+      <div className="absolute left-5 top-1 z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 border-gold/50 bg-primary shadow-md shadow-primary/30 md:left-1/2 md:-translate-x-1/2">
+        <Heart className="h-3 w-3 text-primary-foreground" />
+      </div>
+
+      {/* Konten milestone */}
+      <div
+        className={`md:w-1/2 ${isEven ? 'md:pr-14 md:text-right' : 'md:pl-14'}`}
+      >
+        {/* Tahun */}
+        <span className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+          {year}
+        </span>
+
+        {/* Judul milestone */}
+        <h3
+          className="mb-2 mt-1 font-heading text-foreground"
+          style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)' }}
+        >
+          {title}
+        </h3>
+
+        {/* Deskripsi — dari text-sm ke text-base */}
+        <p className="font-body text-base leading-relaxed text-muted-foreground">
+          {desc}
+        </p>
+      </div>
+    </motion.div>
+  );
+});
 
 export default function LoveStorySection() {
   const { sectionTitle, milestones } = LoveStorySectionData;
-  return (
-    <section className="py-20 px-6 bg-card">
-      <div className="mx-auto max-w-2xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={scrollViewport}
-          transition={scrollRevealTransition}
-          className="mb-14 text-center font-heading text-3xl text-foreground md:text-4xl"
-        >
-          {sectionTitle}
-        </motion.h2>
 
+  return (
+    <section className="py-24 px-6 bg-card">
+      <div className="mx-auto max-w-3xl">
+        <SectionHeader
+          eyebrow="Perjalanan Cinta"
+          heading={sectionTitle}
+        />
+
+        {/* Timeline */}
         <div className="relative">
-          <div className="absolute bottom-0 left-6 top-0 w-px bg-gradient-to-b from-gold/40 via-border to-gold/40 md:left-1/2 md:-translate-x-px" />
+          {/* Garis vertikal */}
+          <div className="absolute bottom-0 left-8 top-0 w-px bg-gradient-to-b from-gold/20 via-gold/40 to-gold/20 md:left-1/2 md:-translate-x-px" />
 
           {milestones.map((m, i) => (
-            <motion.div
+            <MilestoneItem
               key={i}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -28 : 28 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={scrollViewport}
-              transition={{ type: 'tween', duration: 0.62, delay: i * 0.06, ease: scrollEase }}
-              className={`relative mb-12 flex items-start gap-4 pl-14 md:pl-0 ${
-                i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              }`}
-            >
-              <div className="absolute left-4 top-1 z-10 flex h-5 w-5 items-center justify-center rounded-full border-2 border-gold/50 bg-primary shadow-md md:left-1/2 md:-translate-x-1/2">
-                <Heart className="h-2.5 w-2.5 text-primary-foreground" />
-              </div>
-
-              <div className={`md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                <span className="font-body text-xs font-semibold uppercase tracking-widest text-gold">{m.year}</span>
-                <h3 className="mt-1 mb-2 font-heading text-xl text-foreground">{m.title}</h3>
-                <p className="font-body text-sm leading-relaxed text-muted-foreground">{m.desc}</p>
-              </div>
-            </motion.div>
+              index={i}
+              year={m.year}
+              title={m.title}
+              desc={m.desc}
+            />
           ))}
         </div>
       </div>

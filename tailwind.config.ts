@@ -14,8 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['"Playfair Display"', 'serif'],
-        body: ['"Montserrat"', 'sans-serif'],
+        heading: ['"Cormorant Garamond"', '"Playfair Display"', 'serif'],
+        body: ['"Josefin Sans"', '"Montserrat"', 'sans-serif'],
+        accent: ['"Dancing Script"', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -62,8 +63,7 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         gold: "hsl(var(--gold))",
-        sage: "hsl(var(--sage))",
-        terracotta: "hsl(var(--terracotta))",
+        rose: "hsl(var(--rose))",
         cream: {
           DEFAULT: "hsl(var(--cream))",
           dark: "hsl(var(--cream-dark))",
@@ -89,14 +89,19 @@ export default {
         },
         "float": {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
-        "float": "float 3s ease-in-out infinite",
+        "pulse-soft": "pulse-soft 2.5s ease-in-out infinite",
+        "float": "float 3.5s ease-in-out infinite",
+        "shimmer": "shimmer 3s linear infinite",
       },
     },
   },

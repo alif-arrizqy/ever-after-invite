@@ -15,12 +15,12 @@ export const HeroSectionData = {
   backgroundImage: heroBg,
   backgroundAlt: 'Latar undangan pernikahan',
   tagline: 'The Wedding of',
-  groomShortName: 'Ale',
+  groomShortName: 'Fahri',
   brideShortName: 'Bella',
   /** Teks tanggal yang tampil di hero */
-  weddingDateDisplay: 'Minggu, 15 Mei 2026',
+  weddingDateDisplay: 'Sabtu, 06 Juni 2026',
   /** Untuk countdown (zona WIB) */
-  countDownWeddingDate: new Date('2026-09-15T08:00:00+07:00'),
+  countDownWeddingDate: new Date('2026-06-06T08:00:00+07:00'),
 };
 
 /** Alias untuk komponen countdown */
@@ -28,18 +28,18 @@ export const WEDDING_COUNTDOWN_TARGET = HeroSectionData.countDownWeddingDate;
 
 export const CoupleSectionData = {
   groom: {
-    fullName: 'Priandana',
-    parentLine: 'Putra dari Bpk. Susilo Pratama & Ibu Rina Wulandari',
+    fullName: 'Fahri Priandana, S.M',
+    parentLine: 'Putra dari Bpk. Edi Heriyadi & Ibu Maysaroh (Almh.)',
     instagramUrl: 'https://www.instagram.com/priandana23/',
     instagramHandle: 'priandana23',
-    image: { src: groomImg, alt: 'Andi Pratama — mempelai pria' },
+    image: { src: groomImg, alt: 'Fahri Priandana — mempelai pria' },
   },
   bride: {
-    fullName: 'Catrine Bella',
-    parentLine: 'Putri dari Bpk. Hadi Lestari & Ibu Sari Dewi',
+    fullName: 'Catrine Bella Nurazizah, S.Ds',
+    parentLine: 'Putri dari Bpk. Supangat & Ibu Kurniasih',
     instagramUrl: 'https://www.instagram.com/catrinebellanz/',
     instagramHandle: 'catrinebellanz',
-    image: { src: brideImg, alt: 'Putri Ayu Lestari — mempelai wanita' },
+    image: { src: brideImg, alt: 'Catrine Bella Nurazizah — mempelai wanita' },
   },
 };
 
@@ -56,7 +56,6 @@ export type EventBlock = {
   venue: string;
   address: string;
   mapsUrl: string;
-  /** Format Google Calendar: YYYYMMDDTHHmmss (tanpa timezone, asumsi waktu lokal acara) */
   calendarStart: string;
   calendarEnd: string;
 };
@@ -65,23 +64,23 @@ export const EventSectionData = {
   sectionTitle: 'Waktu & Tempat',
   akad: {
     title: 'Akad Nikah',
-    dateLabel: 'Minggu, 15 Mei 2026',
-    time: '08.00 - 10.00 WIB',
-    venue: 'Masjid Agung Al-Azhar',
-    address: 'Jl. Sisingamangaraja, Jakarta Selatan',
-    mapsUrl: 'https://maps.google.com/?q=Masjid+Agung+Al-Azhar+Jakarta',
-    calendarStart: '20250915T080000',
-    calendarEnd: '20250915T100000',
+    dateLabel: 'Sabtu, 06 Juni 2026',
+    time: '08.00 - 11.00 WIB',
+    venue: 'Kediaman Mempelai Wanita, Lapangan Serbaguna PB Mawar 04',
+    address: 'Jl. Kavling Mawar, RT04/RW07, Pasirangin, Cileungsi, Bogor, Jawa Barat',
+    mapsUrl: 'https://maps.app.goo.gl/Pr5JL8uaWJnVtXwA7',
+    calendarStart: '20250606T080000',
+    calendarEnd: '20250606T110000',
   } satisfies EventBlock,
   resepsi: {
     title: 'Resepsi',
-    dateLabel: 'Minggu, 15 Mei 2026',
-    time: '11.00 - 14.00 WIB',
-    venue: 'Balai Kartini',
-    address: 'Jl. Gatot Subroto Kav. 37, Jakarta Selatan',
-    mapsUrl: 'https://maps.google.com/?q=Balai+Kartini+Jakarta',
-    calendarStart: '20250915T110000',
-    calendarEnd: '20250915T140000',
+    dateLabel: 'Minggu, 06 Juni 2026',
+    time: '13.00 - 20.00 WIB',
+    venue: 'Kediaman Mempelai Wanita, Lapangan Serbaguna PB Mawar 04',
+    address: 'Jl. Kavling Mawar, RT04/RW07, Pasirangin, Cileungsi, Bogor, Jawa Barat',
+    mapsUrl: 'https://maps.app.goo.gl/Pr5JL8uaWJnVtXwA7',
+    calendarStart: '20250606T130000',
+    calendarEnd: '20250606T200000',
   } satisfies EventBlock,
 };
 
