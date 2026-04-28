@@ -74,7 +74,7 @@ export const EventSectionData = {
   } satisfies EventBlock,
   resepsi: {
     title: 'Resepsi',
-    dateLabel: 'Minggu, 06 Juni 2026',
+    dateLabel: 'Sabtu, 06 Juni 2026',
     time: '13.00 - 20.00 WIB',
     venue: 'Kediaman Mempelai Wanita, Lapangan Serbaguna PB Mawar 04',
     address: 'Jl. Kavling Mawar, RT04/RW07, Pasirangin, Cileungsi, Bogor, Jawa Barat',
