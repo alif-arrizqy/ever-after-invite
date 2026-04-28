@@ -91,7 +91,7 @@ export default function FooterSection() {
         {/* Credit */}
         <p className="font-body text-sm text-muted-foreground/70">
           <a
-            href="https://www.instagram.com/alif_arrizqy/"
+            href="https://redcode-solutions.netlify.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover-underline-animate transition-colors duration-200 hover:text-primary"

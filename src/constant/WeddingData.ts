@@ -149,7 +149,7 @@ export const FooterSectionData = {
   quote:
     'Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya.',
   quoteSource: 'QS. Ar-Rum: 21',
-  creditLine: 'designed by @alif_arrizqy',
+  creditLine: 'designed by Redcode Solutions',
 };
 
 export const GuestbookSectionData = {
