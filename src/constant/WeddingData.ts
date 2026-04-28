@@ -167,7 +167,7 @@ export const MusicSectionData = {
  */
 export function buildWaInviteBody(guestName: string, guestSlug: string, baseUrl: string): string {
   const invitationUrl = `${baseUrl.replace(/\/$/, '')}/?guest=${encodeURIComponent(guestSlug)}`;
-  const { dateLabel, time, venue, address } = EventSectionData.akad;
+  const { dateLabel, time, venue, address } = EventSectionData.resepsi;
   const locationLine = address ? `${venue}, ${address}` : venue;
 
   return `Assalamualaikum Wr. Wb.
