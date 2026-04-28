@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Copy, Trash2, MessageCircle, Upload, Plus, Users, ExternalLink } from 'lucide-react';
+import { Copy, Trash2, MessageCircle, Upload, Plus, Users, ExternalLink, Download } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -27,7 +27,7 @@ const adminFormField = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
@@ -154,7 +154,15 @@ export default function AdminPage() {
           <div className="bg-card border border-border rounded-xl overflow-hidden">
             <div className="p-6 flex items-center justify-between border-b border-border">
               <h2 className="font-heading text-lg text-foreground">Daftar Tamu ({guests.length})</h2>
-              <div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/template-import-tamu.xlsx"
+                  download="template-import-tamu.xlsx"
+                  className={inviteBtnOutline}
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Download Template
+                </a>
                 <input
                   ref={fileInputRef}
                   type="file"

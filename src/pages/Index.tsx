@@ -12,6 +12,7 @@ import GuestbookSection from '@/components/invitation/GuestbookSection';
 // GiftSection diimport tapi tidak dirender — file tetap ada sesuai permintaan
 // import GiftSection from '@/components/invitation/GiftSection';
 import FooterSection from '@/components/invitation/FooterSection';
+import { HeroSectionData } from '@/constant/WeddingData';
 import { useGuestDisplayName } from '@/hooks/useWeddingSupabase';
 import { prettifySlugFromSlug } from '@/lib/wedding-utils';
 import { cn } from '@/lib/utils';
@@ -27,6 +28,21 @@ export default function Index() {
     guestSlug == null || guestSlug === ''
       ? null
       : (resolvedName ?? prettifySlugFromSlug(guestSlug));
+
+  useEffect(() => {
+    const title = `Wedding of ${HeroSectionData.groomShortName} & ${HeroSectionData.brideShortName}`;
+    const description = `You are cordially invited to the wedding celebration of ${HeroSectionData.groomShortName} & ${HeroSectionData.brideShortName}`;
+
+    document.title = title;
+
+    let meta = document.querySelector('meta[name="description"]');
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.setAttribute('name', 'description');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', description);
+  }, []);
 
   /* Kunci scroll selama gate belum dibuka */
   useEffect(() => {
