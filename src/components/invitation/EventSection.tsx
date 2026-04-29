@@ -47,9 +47,9 @@ const EventCard = memo(function EventCard({ event, delay }: { event: EventBlock;
       viewport={scrollViewport}
       transition={{ ...scrollRevealTransitionMedium, delay }}
     >
-      <Card className="overflow-hidden border border-gold/20 bg-background/95 shadow-md shadow-primary/5 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl hover:shadow-primary/15">
+      <Card className="overflow-hidden border border-[#DC809B]/85 bg-background/95 shadow-md shadow-primary/5 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-[#DC809B] hover:shadow-xl hover:shadow-primary/15">
         {/* Accent bar di atas card */}
-        <div className="h-1.5 bg-gradient-to-r from-primary via-gold to-secondary" />
+        <div className="h-1.5 bg-[#DC809B]" />
 
         <CardContent className="px-6 py-8 text-center md:px-10">
           {/* Judul acara */}

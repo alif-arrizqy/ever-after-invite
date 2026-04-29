@@ -51,6 +51,22 @@ const Lightbox = memo(function Lightbox({
 
 export default function GallerySection() {
   const [selected, setSelected] = useState<GalleryImage | null>(null);
+  const tileSpan = [
+    'md:col-span-2 md:row-span-2',
+    'md:col-span-1 md:row-span-1',
+    'md:col-span-1 md:row-span-2',
+    'md:col-span-2 md:row-span-1',
+    'md:col-span-1 md:row-span-1',
+    'md:col-span-1 md:row-span-2',
+  ];
+  const tileAspect = [
+    'aspect-[4/5]',
+    'aspect-[3/4]',
+    'aspect-[3/5]',
+    'aspect-[16/10]',
+    'aspect-[3/4]',
+    'aspect-[4/5]',
+  ];
 
   return (
     <section className="py-24 px-6 batik-pattern">
@@ -61,8 +77,8 @@ export default function GallerySection() {
           description="Setiap momen adalah kenangan berharga yang akan selalu kami ingat."
         />
 
-        {/* Grid masonry foto */}
-        <div className="columns-2 gap-4 space-y-4 md:columns-3">
+        {/* Grid asimetris terstruktur: variatif namun tetap rapi */}
+        <div className="grid grid-cols-2 gap-4 md:auto-rows-[130px] md:grid-cols-4 md:gap-5">
           {GallerySectionData.images.map((item, i) => (
             <motion.div
               key={i}
@@ -75,13 +91,13 @@ export default function GallerySection() {
                 duration: 0.58,
                 ease:     scrollEase,
               }}
-              className="group relative cursor-pointer break-inside-avoid overflow-hidden rounded-xl"
+              className={`group relative cursor-pointer overflow-hidden rounded-xl ${tileSpan[i % tileSpan.length]}`}
               onClick={() => setSelected(item)}
             >
               <img
                 src={item.src}
                 alt={item.alt}
-                className="w-full rounded-xl border border-gold/15 shadow-md transition-all duration-500 ease-in-out group-hover:scale-105 group-hover:border-gold/35 group-hover:shadow-lg"
+                className={`h-full w-full ${tileAspect[i % tileAspect.length]} rounded-xl border border-gold/15 object-cover shadow-md transition-all duration-500 ease-in-out group-hover:scale-[1.03] group-hover:border-gold/35 group-hover:shadow-lg md:aspect-auto`}
                 loading="lazy"
               />
               {/* Overlay rose saat hover */}

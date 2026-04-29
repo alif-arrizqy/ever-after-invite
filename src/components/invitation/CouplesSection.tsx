@@ -65,7 +65,7 @@ const PersonCard = memo(function PersonCard({
         href={instagramUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={socialIconLink}
+        className={`${socialIconLink} !text-gold hover:!text-gold`}
       >
         <Instagram className="h-4 w-4 text-gold" />
         @{instagramHandle}

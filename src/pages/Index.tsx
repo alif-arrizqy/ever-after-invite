@@ -12,6 +12,7 @@ import GuestbookSection from '@/components/invitation/GuestbookSection';
 // GiftSection diimport tapi tidak dirender — file tetap ada sesuai permintaan
 // import GiftSection from '@/components/invitation/GiftSection';
 import FooterSection from '@/components/invitation/FooterSection';
+import InvitationMusic from '@/components/invitation/InvitationMusic';
 import { HeroSectionData } from '@/constant/WeddingData';
 import { useGuestDisplayName } from '@/hooks/useWeddingSupabase';
 import { prettifySlugFromSlug } from '@/lib/wedding-utils';
@@ -23,6 +24,7 @@ export default function Index() {
   const guestSlug = searchParams.get('guest');
   const { data: resolvedName } = useGuestDisplayName(guestSlug);
   const [invitationUnlocked, setInvitationUnlocked] = useState(false);
+  const [heroReveal, setHeroReveal] = useState(false);
 
   const guestName =
     guestSlug == null || guestSlug === ''
@@ -65,7 +67,12 @@ export default function Index() {
 
   const handleGateOpen = () => {
     setInvitationUnlocked(true);
-    /* Scroll halus ke HeroSection setelah gate terbuka */
+    /* Reveal halus ke hero setelah gate tertutup */
+    requestAnimationFrame(() => {
+      setHeroReveal(true);
+    });
+
+    /* Pastikan selalu mulai dari HeroSection */
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: 'instant' });
     });
@@ -76,10 +83,14 @@ export default function Index() {
       {/* Gate cover — overlay penuh, tersembunyi setelah animasi selesai */}
       <GateCover guestName={guestName} onOpen={handleGateOpen} />
 
+      {/* Musik: di luar invitation-shell + portal ke body — tidak ikut opacity:0 saat reveal */}
+      {invitationUnlocked && <InvitationMusic />}
+
       {/* Konten undangan — tersembunyi di balik gate sampai dibuka */}
       <div
         className={cn(
-          'scroll-smooth motion-reduce:scroll-auto',
+          'invitation-shell scroll-smooth motion-reduce:scroll-auto',
+          !heroReveal && 'invitation-shell-locked',
           !invitationUnlocked && 'pointer-events-none select-none'
         )}
       >

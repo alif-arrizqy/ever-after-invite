@@ -2,7 +2,6 @@ import { useEffect, useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { HeroSectionData, WEDDING_COUNTDOWN_TARGET } from '@/constant/WeddingData';
 import { scrollEase } from '@/lib/scroll-motion';
-import InvitationMusic from '@/components/invitation/InvitationMusic';
 
 interface HeroSectionProps {
   guestName: string | null;
@@ -81,8 +80,6 @@ const HeroSection = memo(function HeroSection({ guestName }: HeroSectionProps) {
       id="hero"
       className="relative flex min-h-[100dvh] flex-col overflow-hidden"
     >
-      <InvitationMusic />
-
       {/* Foto background dengan parallax subtle */}
       <div className="absolute inset-0">
         <img

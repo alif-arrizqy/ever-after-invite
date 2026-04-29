@@ -35,10 +35,10 @@ export const inviteBtnOutline = cn(
 
 /** Tombol musik (fixed) */
 export const inviteMusicControl = cn(
-  'fixed bottom-6 left-6 z-[60] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary/30 bg-background/90 text-primary shadow-md backdrop-blur-md',
+  'fixed bottom-5 right-5 z-[500] flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary/40 bg-background/95 text-primary shadow-lg shadow-black/20 backdrop-blur-md pointer-events-auto',
   stdTransition,
-  'hover:border-primary/60 hover:bg-card hover:text-primary hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5',
-  'sm:left-auto sm:right-6 sm:h-14 sm:w-14',
+  'hover:border-primary/70 hover:bg-card hover:text-primary hover:shadow-xl hover:shadow-primary/25 hover:-translate-y-0.5',
+  'sm:bottom-6 sm:right-6 sm:h-14 sm:w-14',
   focusRing
 );
 

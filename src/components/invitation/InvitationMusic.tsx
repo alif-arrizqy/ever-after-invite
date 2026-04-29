@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { Pause, Play } from 'lucide-react';
 import { MusicSectionData } from '@/constant/WeddingData';
 import { inviteMusicControl } from '@/components/invitation/invite-styles';
@@ -61,7 +62,16 @@ export default function InvitationMusic() {
     }
   };
 
-  return (
+  /**
+   * Portal ke document.body: kontrol musik tidak boleh di dalam .invitation-shell
+   * saat masih ada kelas invitation-shell-locked (opacity:0 + blur), karena
+   * seluruh subtree ikut tidak terlihat termasuk elemen position:fixed.
+   */
+  if (typeof document === 'undefined') {
+    return null;
+  }
+
+  return createPortal(
     <>
       <audio ref={ref} src={MusicSectionData.src} preload="auto" loop className="hidden" />
       <button
@@ -72,6 +82,7 @@ export default function InvitationMusic() {
       >
         {playing ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 pl-0.5" />}
       </button>
-    </>
+    </>,
+    document.body
   );
 }
