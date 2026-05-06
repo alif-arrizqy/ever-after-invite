@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
     server: {
       host: "::",
       port: 8080,
+      allowedHosts: '', // cloudflare tunnel url here
       hmr: {
         overlay: false,
       },
