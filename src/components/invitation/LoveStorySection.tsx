@@ -7,12 +7,10 @@ import SectionHeader from '@/components/invitation/SectionHeader';
 
 /** Item tunggal milestone love story */
 const MilestoneItem = memo(function MilestoneItem({
-  year,
   title,
   desc,
   index,
 }: {
-  year:   string;
   title:  string;
   desc:   string;
   index:  number;
@@ -39,14 +37,9 @@ const MilestoneItem = memo(function MilestoneItem({
       <div
         className={`md:w-1/2 ${isEven ? 'md:pr-14 md:text-right' : 'md:pl-14'}`}
       >
-        {/* Tahun */}
-        <span className="font-body text-xs font-semibold uppercase tracking-[0.2em] text-gold">
-          {year}
-        </span>
-
         {/* Judul milestone */}
         <h3
-          className="mb-2 mt-1 font-heading text-foreground"
+          className="mb-2 font-heading text-foreground"
           style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)' }}
         >
           {title}
@@ -81,7 +74,6 @@ export default function LoveStorySection() {
             <MilestoneItem
               key={i}
               index={i}
-              year={m.year}
               title={m.title}
               desc={m.desc}
             />
