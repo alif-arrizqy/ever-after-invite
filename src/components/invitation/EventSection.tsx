@@ -47,9 +47,9 @@ const EventCard = memo(function EventCard({ event, delay }: { event: EventBlock;
       viewport={scrollViewport}
       transition={{ ...scrollRevealTransitionMedium, delay }}
     >
-      <Card className="overflow-hidden border border-[#DC809B]/85 bg-background/95 shadow-md shadow-primary/5 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-[#DC809B] hover:shadow-xl hover:shadow-primary/15">
+      <Card className="overflow-hidden border border-primary/45 bg-background/95 shadow-md shadow-primary/5 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-primary/75 hover:shadow-xl hover:shadow-primary/15">
         {/* Accent bar di atas card */}
-        <div className="h-1.5 bg-[#DC809B]" />
+        <div className="h-1.5 bg-primary" />
 
         <CardContent className="px-6 py-8 text-center md:px-10">
           {/* Judul acara */}
@@ -73,17 +73,17 @@ const EventCard = memo(function EventCard({ event, delay }: { event: EventBlock;
           </div>
 
           {/* Tombol aksi */}
-          <div className="flex flex-col justify-center gap-3 sm:flex-row">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <a
               href={event.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={inviteBtnSecondary}
+              className={`${inviteBtnSecondary} w-full sm:min-h-[44px]`}
             >
               <MapPin className="h-3.5 w-3.5" />
               Google Maps
             </a>
-            <button type="button" onClick={addToCalendar} className={inviteBtnPrimary}>
+            <button type="button" onClick={addToCalendar} className={`${inviteBtnPrimary} w-full sm:min-h-[44px]`}>
               <Calendar className="h-3.5 w-3.5" />
               Tambah ke Kalender
             </button>
@@ -96,7 +96,7 @@ const EventCard = memo(function EventCard({ event, delay }: { event: EventBlock;
 
 export default function EventSection() {
   return (
-    <section className="py-24 px-6 batik-pattern">
+    <section className="py-24 px-6">
       <div className="mx-auto max-w-4xl">
         <SectionHeader
           eyebrow="Waktu & Tempat"
