@@ -4,7 +4,7 @@ import { DiamondDivider } from '@/components/invitation/SectionHeader';
 
 export default function GreetingSection() {
   return (
-    <section id="greeting" className="py-24 px-6 batik-pattern gunungan-bg">
+    <section id="greeting" className="py-24 px-6">
       <div className="mx-auto max-w-2xl text-center">
 
         {/* Kaligrafi pembuka — font arab, ukuran lebih besar agar terbaca */}
