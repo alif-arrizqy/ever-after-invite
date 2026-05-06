@@ -100,32 +100,50 @@ export const LoveStorySectionData = {
   sectionTitle: 'Love Story',
   milestones: [
     {
-      year: '2019',
-      title: 'Pertama Bertemu',
-      desc: 'Kami pertama kali bertemu di acara reuni kampus. Senyumnya yang hangat langsung menarik perhatian.',
+      title: 'Perkenalan',
+      desc: 'Berawal dari sebuah proyek film sederhana di masa sekolah, pertemuan kami sebagai kakak dan adik tingkat menjadi titik awal dari kisah yang tak pernah kami duga sebelumnya.',
     },
     {
-      year: '2020',
-      title: 'Mulai Dekat',
-      desc: 'Pandemi membuat kami semakin sering berbicara lewat video call. Dari teman menjadi sahabat.',
+      title: 'Menjalin Hubungan',
+      desc: 'Dari kebersamaan yang awalnya biasa, tumbuhlah kedekatan yang semakin berarti. Waktu membawa kami melewati berbagai fase kehidupan, dari bangku kuliah hingga dunia kerja, diiringi dengan proses saling memahami, mendukung, dan bertumbuh dalam tujuan yang sama.',
     },
     {
-      year: '2021',
-      title: 'Resmi Berpacaran',
-      desc: 'Di bawah langit senja, Andi memberanikan diri mengungkapkan perasaannya. Putri menjawab "Iya".',
-    },
-    {
-      year: '2023',
-      title: 'Lamaran',
-      desc: 'Dengan doa dan restu kedua orang tua, Andi melamar Putri di hadapan keluarga besar.',
-    },
-    {
-      year: '2025',
       title: 'Hari Bahagia',
-      desc: 'InsyaAllah, kami akan mengikat janji suci di bulan Mei 2025. Bismillah!',
-    },
+      desc: 'Di penghujung tahun 2025, dengan keyakinan yang semakin kuat dan restu dari kedua keluarga, kami memutuskan untuk melangkah ke jenjang yang lebih serius. Memasuki awal tahun 2026, niat tersebut kami wujudkan dalam sebuah komitmen, hingga akhirnya kami bersiap mengikat janji suci pernikahan di pertengahan tahun ini.',
+    }
   ],
 };
+
+// export const LoveStorySectionData = {
+//   sectionTitle: 'Love Story',
+//   milestones: [
+//     {
+//       year: '2019',
+//       title: 'Pertama Bertemu',
+//       desc: 'Kami pertama kali bertemu di acara reuni kampus. Senyumnya yang hangat langsung menarik perhatian.',
+//     },
+//     {
+//       year: '2020',
+//       title: 'Mulai Dekat',
+//       desc: 'Pandemi membuat kami semakin sering berbicara lewat video call. Dari teman menjadi sahabat.',
+//     },
+//     {
+//       year: '2021',
+//       title: 'Resmi Berpacaran',
+//       desc: 'Di bawah langit senja, Andi memberanikan diri mengungkapkan perasaannya. Putri menjawab "Iya".',
+//     },
+//     {
+//       year: '2023',
+//       title: 'Lamaran',
+//       desc: 'Dengan doa dan restu kedua orang tua, Andi melamar Putri di hadapan keluarga besar.',
+//     },
+//     {
+//       year: '2025',
+//       title: 'Hari Bahagia',
+//       desc: 'InsyaAllah, kami akan mengikat janji suci di bulan Mei 2025. Bismillah!',
+//     },
+//   ],
+// };
 
 export const GiftSectionData = {
   sectionTitle: 'Wedding Gift',
