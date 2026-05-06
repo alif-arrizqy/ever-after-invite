@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* === PALET UTAMA: Rose Pink #DC809B & Peach #f8d5c1 === */
+    /* === PALET UTAMA: Coklat hangat + Peach === */
 
     /* Background: #f8d5c1 (peach lembut) → HSL(22, 80%, 87%) */
     --background: 22 80% 87%;
@@ -18,13 +18,13 @@
     --popover: 22 80% 87%;
     --popover-foreground: 342 35% 22%;
 
-    /* Primary: #DC809B (pink mawar) → HSL(342, 57%, 68%) */
-    --primary: 342 57% 68%;
+    /* Primary: coklat hangat (selaras aksen gold) */
+    --primary: 24 48% 34%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: rose muda/nude */
-    --secondary: 342 30% 84%;
-    --secondary-foreground: 342 40% 28%;
+    /* Secondary: krem/tan */
+    --secondary: 28 45% 88%;
+    --secondary-foreground: 24 30% 22%;
 
     /* Muted: peach redup */
     --muted: 22 35% 90%;
@@ -37,60 +37,60 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Border & input: rose-tinted */
-    --border: 342 25% 80%;
-    --input: 342 25% 80%;
-    --ring: 342 57% 68%;
+    /* Border & input: tan lembut */
+    --border: 28 22% 78%;
+    --input: 28 22% 78%;
+    --ring: 24 48% 34%;
 
     --radius: 0.75rem;
 
-    /* Sidebar - menggunakan nuansa rose gelap */
-    --sidebar-background: 342 35% 18%;
+    /* Sidebar - nuansa coklat gelap */
+    --sidebar-background: 24 30% 14%;
     --sidebar-foreground: 22 40% 90%;
-    --sidebar-primary: 342 57% 68%;
+    --sidebar-primary: 24 48% 34%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 342 30% 25%;
+    --sidebar-accent: 24 22% 22%;
     --sidebar-accent-foreground: 22 40% 90%;
-    --sidebar-border: 342 20% 28%;
-    --sidebar-ring: 342 57% 68%;
+    --sidebar-border: 24 18% 22%;
+    --sidebar-ring: 24 48% 34%;
 
     /* Custom tokens */
     --gold: 39 46% 61%;          /* #c9a96e champagne gold */
-    --rose: 342 57% 68%;         /* #DC809B primary rose */
+    --rose: 24 48% 34%;
     --cream: 22 80% 96%;         /* very light cream */
     --cream-dark: 22 55% 90%;    /* cream agak gelap */
   }
 
   .dark {
-    --background: 342 25% 12%;
+    --background: 24 25% 10%;
     --foreground: 22 40% 90%;
-    --card: 342 22% 18%;
+    --card: 24 22% 14%;
     --card-foreground: 22 40% 90%;
-    --popover: 342 22% 18%;
+    --popover: 24 22% 14%;
     --popover-foreground: 22 40% 90%;
-    --primary: 342 57% 72%;
+    --primary: 24 55% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 342 20% 28%;
+    --secondary: 24 20% 22%;
     --secondary-foreground: 22 40% 90%;
-    --muted: 342 15% 22%;
-    --muted-foreground: 342 10% 58%;
+    --muted: 24 14% 18%;
+    --muted-foreground: 24 10% 60%;
     --accent: 39 46% 55%;
     --accent-foreground: 22 40% 90%;
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 100%;
-    --border: 342 15% 28%;
-    --input: 342 15% 28%;
-    --ring: 342 57% 68%;
-    --sidebar-background: 342 25% 8%;
+    --border: 24 18% 24%;
+    --input: 24 18% 24%;
+    --ring: 24 55% 60%;
+    --sidebar-background: 24 25% 7%;
     --sidebar-foreground: 22 40% 90%;
-    --sidebar-primary: 342 57% 72%;
+    --sidebar-primary: 24 55% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 342 20% 15%;
+    --sidebar-accent: 24 18% 14%;
     --sidebar-accent-foreground: 22 40% 90%;
-    --sidebar-border: 342 15% 20%;
-    --sidebar-ring: 342 57% 68%;
+    --sidebar-border: 24 18% 18%;
+    --sidebar-ring: 24 55% 60%;
     --gold: 39 46% 61%;
-    --rose: 342 57% 72%;
+    --rose: 24 55% 60%;
     --cream: 22 80% 96%;
     --cream-dark: 22 55% 90%;
   }
@@ -116,13 +116,13 @@
 
   .text-gradient-rose {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(342 70% 60%), hsl(var(--primary)), hsl(342 45% 72%));
+    background-image: linear-gradient(135deg, hsl(28 55% 48%), hsl(var(--primary)), hsl(36 55% 62%));
   }
 }
 
 /* Batik subtle pattern overlay */
 .batik-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23DC809B' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B5A2B' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Gate cover: batik ceremonial motion and gold finishing */
