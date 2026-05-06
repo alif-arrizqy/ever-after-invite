@@ -1,5 +1,6 @@
 import { useState, memo } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { scrollEase, scrollRevealTransition, scrollViewport } from '@/lib/scroll-motion';
 import { GallerySectionData } from '@/constant/WeddingData';
@@ -15,13 +16,15 @@ const Lightbox = memo(function Lightbox({
   image: GalleryImage;
   onClose: () => void;
 }) {
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/85 backdrop-blur-sm"
+      className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/85 backdrop-blur-sm"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -45,31 +48,16 @@ const Lightbox = memo(function Lightbox({
         className="max-h-[88vh] max-w-[90vw] rounded-xl shadow-2xl"
         onClick={e => e.stopPropagation()}
       />
-    </motion.div>
+    </motion.div>,
+    document.body
   );
 });
 
 export default function GallerySection() {
   const [selected, setSelected] = useState<GalleryImage | null>(null);
-  const tileSpan = [
-    'md:col-span-2 md:row-span-2',
-    'md:col-span-1 md:row-span-1',
-    'md:col-span-1 md:row-span-2',
-    'md:col-span-2 md:row-span-1',
-    'md:col-span-1 md:row-span-1',
-    'md:col-span-1 md:row-span-2',
-  ];
-  const tileAspect = [
-    'aspect-[4/5]',
-    'aspect-[3/4]',
-    'aspect-[3/5]',
-    'aspect-[16/10]',
-    'aspect-[3/4]',
-    'aspect-[4/5]',
-  ];
 
   return (
-    <section className="py-24 px-6 batik-pattern">
+    <section className="py-24 px-6">
       <div className="mx-auto max-w-5xl">
         <SectionHeader
           eyebrow="Galeri"
@@ -77,8 +65,8 @@ export default function GallerySection() {
           description="Setiap momen adalah kenangan berharga yang akan selalu kami ingat."
         />
 
-        {/* Grid asimetris terstruktur: variatif namun tetap rapi */}
-        <div className="grid grid-cols-2 gap-4 md:auto-rows-[130px] md:grid-cols-4 md:gap-5">
+        {/* Grid rapi untuk desktop + tetap nyaman di mobile */}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5">
           {GallerySectionData.images.map((item, i) => (
             <motion.div
               key={i}
@@ -91,32 +79,40 @@ export default function GallerySection() {
                 duration: 0.58,
                 ease:     scrollEase,
               }}
-              className={`group relative cursor-pointer overflow-hidden rounded-xl ${tileSpan[i % tileSpan.length]}`}
-              onClick={() => setSelected(item)}
+              className="group relative overflow-hidden rounded-xl"
             >
-              <img
-                src={item.src}
-                alt={item.alt}
-                className={`h-full w-full ${tileAspect[i % tileAspect.length]} rounded-xl border border-gold/15 object-cover shadow-md transition-all duration-500 ease-in-out group-hover:scale-[1.03] group-hover:border-gold/35 group-hover:shadow-lg md:aspect-auto`}
-                loading="lazy"
-              />
-              {/* Overlay rose saat hover */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-primary/35 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              {/* Label klik */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <span className="rounded-full bg-white/20 px-3 py-1 font-body text-xs uppercase tracking-[0.2em] text-white backdrop-blur-sm">
-                  Lihat
-                </span>
-              </div>
+              <button
+                type="button"
+                className="relative block w-full overflow-hidden rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                onClick={() => setSelected(item)}
+                aria-label={`Lihat foto ${i + 1} lebih besar`}
+              >
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="h-full w-full aspect-[4/5] rounded-xl border border-gold/15 object-cover shadow-md transition-all duration-500 ease-in-out group-hover:scale-[1.03] group-hover:border-gold/35 group-hover:shadow-lg"
+                  loading="lazy"
+                />
+                {/* Overlay saat hover */}
+                <div className="pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-t from-primary/35 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                {/* Label klik */}
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <span className="rounded-full bg-white/20 px-3 py-1 font-body text-xs uppercase tracking-[0.2em] text-white backdrop-blur-sm">
+                    Lihat
+                  </span>
+                </div>
+              </button>
             </motion.div>
           ))}
         </div>
       </div>
 
       {/* Lightbox */}
-      {selected && (
-        <Lightbox image={selected} onClose={() => setSelected(null)} />
-      )}
+      <AnimatePresence>
+        {selected && (
+          <Lightbox image={selected} onClose={() => setSelected(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
