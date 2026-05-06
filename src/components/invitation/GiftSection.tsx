@@ -22,7 +22,7 @@ export default function GiftSection() {
   const { sectionTitle, intro, banks, shipping } = GiftSectionData;
 
   return (
-    <section className="batik-pattern px-6 py-12 md:py-16">
+    <section className="px-6 py-12 md:py-16">
       <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
