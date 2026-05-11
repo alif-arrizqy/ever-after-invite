@@ -8,7 +8,7 @@ import gallery3 from '@/assets/gallery-3.jpg';
 import gallery4 from '@/assets/gallery-4.jpg';
 import gallery5 from '@/assets/gallery-5.jpg';
 import gallery6 from '@/assets/gallery-6.jpg';
-import weddingMusicUrl from '@/assets/akad-payung-teduh.mp3';
+import weddingMusicUrl from '@/assets/jenang-gulo.mp3';
 
 /** Background hero (foto cover undangan) */
 export const HeroSectionData = {
