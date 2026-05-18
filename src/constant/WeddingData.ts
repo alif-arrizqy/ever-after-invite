@@ -206,8 +206,10 @@ ${invitationUrl}
 
 Kehadiran Bapak/Ibu/Saudara/i sangat berarti bagi kami.
 
-Atas perhatiannya kami ucapkan terima kasih.
-Wassalamualaikum Wr. Wb.
+Mohon maaf apabila undangan ini hanya kami sampaikan melalui pesan singkat.
+*Demi menjaga privasi serta kekhidmatan acara, besar harapan kami agar Bapak/Ibu/Saudara/i tidak menyebarluaskan informasi terkait acara kepada pihak lain.*
+Atas perhatian dan doa restu yang diberikan, kami ucapkan terimakasih.
+Wassalamualaikum Wr. Wb..
 
 Kami yang berbahagia,
 *${CoupleSectionData.groom.fullName} & ${CoupleSectionData.bride.fullName}*`;
